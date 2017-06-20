@@ -209,6 +209,14 @@ def describe_match():
             expect(instance.kind) == 'egg'
             expect(instances).contains(instance)
 
+    def with_paths_in_path_format(model_class):
+        instance = model_class(kind="foo/bar", key="qux")
+        instance.__mapper__.create()
+
+        matches = list(utilities.match(model_class, key="foo/bar"))
+
+        expect(matches) == [instance]
+
 
 def describe_load():
 
