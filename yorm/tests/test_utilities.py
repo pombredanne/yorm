@@ -217,6 +217,15 @@ def describe_match():
 
         expect(matches) == [instance]
 
+    def with_paths_in_path_format2(model_class):
+        # To cover ambiguity
+        instance = model_class(kind="qux", key="foo/bar")
+        instance.__mapper__.create()
+
+        matches = list(utilities.match(model_class, kind="qux"))
+
+        expect(matches) == [instance]
+
 
 def describe_load():
 
