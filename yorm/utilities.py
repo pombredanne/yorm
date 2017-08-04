@@ -67,7 +67,7 @@ class GlobFormatter(string.Formatter):
 
     def format_field(self, value, format_spec):
         if value is self.WILDCARD:
-            return '*'
+            return '**'
         else:
             return super().format_field(value, format_spec)
 
@@ -114,7 +114,7 @@ def match(cls_or_path, _factory=None, **kwargs):
     del kwargs['self']
     py_pattern = parse.compile(path_format)
 
-    for filename in glob.iglob(posix_pattern):
+    for filename in glob.iglob(posix_pattern, recursive=True):
         pathfields = py_pattern.parse(filename).named
         fields = _unpack_parsed_fields(pathfields)
         fields.update(kwargs)

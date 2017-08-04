@@ -213,7 +213,7 @@ def describe_match():
         instance = model_class(kind="foo/bar", key="qux")
         instance.__mapper__.create()
 
-        matches = list(utilities.match(model_class, key="foo/bar"))
+        matches = list(utilities.match(model_class, kind="foo/bar"))
 
         expect(matches) == [instance]
 
